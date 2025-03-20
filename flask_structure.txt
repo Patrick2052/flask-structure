@@ -1,0 +1,58 @@
+.
+├── Dockerfile
+├── app
+│   ├── __init__.py
+│   ├── api                 -> the api folder is the entrypoint for all routes.
+│   │   ├── __init__.py
+│   │   ├── root.py         -> root.py holds the base blueprint for all api endpoints v1 and v2 are registered here
+│   │   ├── v1              -> v1 and v2 are sub blueprints that hold the routes for the respective versions. 
+│   │   │   ├── __init__.py
+│   │   │   └── v1.py       -> these files should derive their routes only form other subapps - they should not contain any logic
+│   │   └── v2
+│   │       ├── __init__.py
+│   │       └── v2.py
+│   ├── app.py
+│   ├── core                -> core holds core functioonality of the app (setup, celery, logger, etc.)
+│   │   ├── __init__.py
+│   │   ├── app.py          -> holds the main create_app function
+│   │   ├── celery.py
+│   │   ├── database
+│   │   │   ├── __init__.py
+│   │   │   └── models
+│   │   │       └── __init__.py
+│   │   └── logger.py
+│   ├── services            -> services are defined as reusable components that can be used across multiple subapps. For example, a service that sends emails or a service that interacts with a sftp server
+│   │   ├── __init__.py
+│   │   ├── service_1
+│   │   │   ├── __init__.py -> use __init__ files to structure your service interface using __all__=[...] to define the public interface of the service
+│   │   │   ├── database_transactions.py
+│   │   │   ├── exceptions.py
+│   │   │   ├── service.py
+│   │   │   ├── tasks.py
+│   │   │   └── utils.py
+│   │   └── service_2
+│   │       ├── __init__.py
+│   │       ├── database_transactions.py
+│   │       ├── exceptions.py
+│   │       ├── service.py
+│   │       ├── tasks.py
+│   │       └── utils.py
+│   ├── subapp_1            -> subapps hold logical groupings of routes, models, schemas, etc. For example all routes for 'analysis' or all routes for 'administrations'
+│   │   ├── __init__.py     -> use __init__ files to structure your service interface using __all__=[...] to define the public interface of the service
+│   │   ├── models.py
+│   │   ├── routes.py
+│   │   ├── schemas.py
+│   │   ├── types.py
+│   │   └── utils.py
+│   └── subapp_2
+│       ├── __init__.py
+│       ├── models.py
+│       ├── routes.py
+│       ├── schemas.py
+│       ├── types.py
+│       └── utils.py
+├── requirements.txt
+├── run.py                  -> optional entrypoint for the app 
+└── test.txt
+
+12 directories, 43 files

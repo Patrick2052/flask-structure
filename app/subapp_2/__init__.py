@@ -1,0 +1,3 @@
+# from .routes import main_blueprint....
+
+# then import this blueprint to the v* folder and register your app
